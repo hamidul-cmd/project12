@@ -1,7 +1,15 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import leaf from "../assets/leaf.png";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import leafcapsule1 from "../assets/leafcapsule1.png";
+import leafcapsule2 from "../assets/leafcapsule2.png";
+import leafcapsule3 from "../assets/leafcapsule3.png";
+import {
+  RiArrowDownFill,
+  RiArrowDownLine,
+  RiHeartFill,
+} from "@remixicon/react";
 
 function Hero() {
   const leftlinks = ["home", "contact", "blog"];
@@ -9,6 +17,10 @@ function Hero() {
   const lefttextref = useRef(null);
   const righttextref = useRef(null);
   const leafref = useRef(null);
+  const [scrollDir, setScrollDir] = useState(null);
+  const lastScrollY = useRef(0);
+  const leafcapsule = [leafcapsule1, leafcapsule2, leafcapsule3];
+  const [arrowactive, setarrowactive] = useState(false);
   useGSAP(() => {
     gsap.from(lefttextref.current, {
       translateX: -150,
@@ -27,10 +39,33 @@ function Hero() {
       ease: "power4.out",
     });
   });
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const direction = currentScrollY > lastScrollY.current ? "down" : "up";
+
+      if (direction !== scrollDir) {
+        setScrollDir(direction);
+
+        if (leafref.current) {
+          gsap.to(leafref.current, {
+            rotate: direction === "down" ? 10 : 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollDir]);
   return (
     <>
       <section className="p-2.5 w-full h-screen">
-        <div className="hero__bg w-full h-full rounded-[40px]">
+        <div className="hero__bg w-full h-full rounded-[40px] relative">
           <header className="text-white flex justify-between items-center px-[45px] py-[37px] mb-[130px] relative z-[500]">
             <div className="flex items-center gap-1">
               <a
@@ -163,6 +198,49 @@ function Hero() {
               alt="leaf"
               className="absolute top-6 left-[42%] z-30"
             />
+          </div>
+          <div className="absolute bottom-5 left-5 flex items-center">
+            <div className="max-w-[272px] p-4 pr-12.5 rounded-[32px] border border-[#979797] blur_14 bg-[#fff3]">
+              <h4 className="text-[38px] font-medium text-white tracking-[-1.5%] mb-5 whitespace-nowrap leading-13">
+                100+ Plants
+              </h4>
+              <p className="text-base font-medium tracking-[-1.5%] text-white">
+                We want our visitors to be inspire to get their hands dirty
+              </p>
+            </div>
+            <div className="h-[192px] w-[112px] border border-[#979797] rounded-[32px] blur_14 bg-[#fff3] hover:ml-5 bounce">
+              {leafcapsule.map((leaf, index) => {
+                return (
+                  <img
+                    src={leaf}
+                    alt="leaf"
+                    key={index}
+                    className={`absolute h-[72px] w-[72px] rounded-full hover:h-[126px] hover:w-[72px] hover:rounded-3xl bounce ${
+                      index === 0
+                        ? "top-5 left-1/2 -translate-x-1/2 z-10 hover:z-40"
+                        : index === 1
+                        ? "top-1/2 left-1/2 -translate-1/2 z-20 hover:z-40"
+                        : "bottom-5 left-1/2 -translate-x-1/2 z-10 hover:z-40"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="absolute right-0 bottom-0 flex flex-col items-end p-5">
+            <div
+              onMouseEnter={() => setarrowactive(!arrowactive)}
+              className="mr-10 mb-10 p-5 rounded-full border-2 border-white w-fit hover:bg-white transition-all duration-200 ease-in cursor-pointer"
+            >
+              <RiArrowDownLine
+                size={50} // set custom `width` and `height`
+                color={arrowactive? "black":"white"} // set `fill` color
+                className="my-icon" // add custom class name
+              />
+            </div>
+            <a href="" className="block p-2.5 bg-white rounded-[32px]">
+              <span className="px-24.5 py-7.5 block text-[25px] font-semibold rounded-[32px] border border-black hover:text-white hover:bg-black transition-all duration-300 ease-in-out">Shop Tropical Plants</span>
+            </a>
           </div>
         </div>
       </section>

@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-
-
 * {
-  font-family: 'Lufga', sans-serif;
+  font-family: "Lufga", sans-serif;
 }
 
 @theme {
@@ -103,12 +101,33 @@
   --shadow-ss2: 0px 0px 0px 4px #191919;
   --shadow-ss1: 0px 0px 0px 6px #191919;
   --ease-bounce: cubic-bezier(0.04, 1.25, 1, 1);
+  --tracking-1_5: -1.5%;
+  --leading-full: 100%;
 }
 .hero__bg {
   background: url(./assets/herobg.png) no-repeat center center / cover;
 }
 
-
-.blur_10{
+.blur_10 {
   backdrop-filter: blur(10px);
+}
+.blur_14 {
+  backdrop-filter: blur(14px);
+}
+.blur_7 {
+  backdrop-filter: blur(7px);
+}
+.bounce {
+  transition: height 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    width 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    margin-left 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+.scalbounce {
+  transition: all 800ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+.cird1 {
+  background: url(assets/petbg.png);
+}
+.cird2, .cird3 {
+  background: url(assets/petcardbg2.png);
 }
