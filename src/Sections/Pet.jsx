@@ -1,11 +1,12 @@
 import { RiArrowRightLine } from "@remixicon/react";
 import React from "react";
+import PetCird from "../Components/PetCird";
 
 function Pet() {
   const links = ["Outdoor Plant", "Indoor Plant", "Flower Pot", "Potted Plant"];
   return (
     <>
-      <div className="flex justify-between items-center mb-20">
+      <div className="flex justify-between items-center mb-20 px-[50px]">
         <ul className="flex gap-1">
           {links.map((data, i) => {
             return (
@@ -40,8 +41,8 @@ function Pet() {
             interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Sed lobortis orci elementum egestas lobortis.
           </p>
-          <div className="py-[22px]">
-            <div className="flex blur_7 w-fit items-center gap-1">
+          <div className="py-[22px] border-t border-white">
+            <div className="flex blur_7 w-fit items-center gap-1  pr-5 rounded-full">
               <div className="p-[9px] rounded-full border border-white bg-[#c7c7c75c]">
                 <svg
                   width="28"
@@ -64,8 +65,17 @@ function Pet() {
             </div>
           </div>
         </div>
-        <div className="cird2 max-w-[340px] bg-center bg-cover rounded-20"></div>
-        <div className="cird3 max-w-[340px] bg-center bg-cover rounded-20"></div>
+
+        <PetCird
+          title="Orchids"
+          pera="Orchids are easily everyones Favorite flowering plant, Find new orchids and orchids success items in this collection"
+          capsule="Araceae"
+        />
+        <PetCird
+          title="Succulents"
+          pera="All Succulents are cacti, but not all cacti are succulents. Both make low maintence house pants."
+          capsule="Moraceae"
+        />
       </div>
     </>
   );

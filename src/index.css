@@ -103,6 +103,7 @@
   --ease-bounce: cubic-bezier(0.04, 1.25, 1, 1);
   --tracking-1_5: -1.5%;
   --leading-full: 100%;
+  --ease-bounce: cubic-bezier(0.47, 1.64, 0.41, 0.8);
 }
 .hero__bg {
   background: url(./assets/herobg.png) no-repeat center center / cover;
@@ -117,6 +118,12 @@
 .blur_7 {
   backdrop-filter: blur(7px);
 }
+.blur_15 {
+  backdrop-filter: blur(15px);
+}
+.blur_25 {
+  backdrop-filter: blur(25px);
+}
 .bounce {
   transition: height 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
     width 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
@@ -128,6 +135,19 @@
 .cird1 {
   background: url(assets/petbg.png);
 }
-.cird2, .cird3 {
+.cird2 {
   background: url(assets/petcardbg2.png);
+  filter: grayscale(100%);
+  transition: all 300ms ease-in-out;
 }
+.cird2:hover {
+  filter: grayscale(0%);
+}
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+

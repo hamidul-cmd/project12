@@ -20,7 +20,7 @@ function Hero() {
   const [scrollDir, setScrollDir] = useState(null);
   const lastScrollY = useRef(0);
   const leafcapsule = [leafcapsule1, leafcapsule2, leafcapsule3];
-  const [arrowactive, setarrowactive] = useState(false);
+  const [arrowactive, setArrowActive] = useState(false);
   useGSAP(() => {
     gsap.from(lefttextref.current, {
       translateX: -150,
@@ -229,17 +229,22 @@ function Hero() {
           </div>
           <div className="absolute right-0 bottom-0 flex flex-col items-end p-5">
             <div
-              onMouseEnter={() => setarrowactive(!arrowactive)}
-              className="mr-10 mb-10 p-5 rounded-full border-2 border-white w-fit hover:bg-white transition-all duration-200 ease-in cursor-pointer"
+              onMouseEnter={() => setArrowActive(true)}
+              onMouseLeave={() => setArrowActive(false)}
+              className={`mr-10 mb-10 p-5 rounded-full border-2 w-fit transition-all duration-200 ease-in cursor-pointer ${
+                arrowactive ? "bg-white border-white" : "border-white"
+              }`}
             >
               <RiArrowDownLine
-                size={50} // set custom `width` and `height`
-                color={arrowactive? "black":"white"} // set `fill` color
-                className="my-icon" // add custom class name
+                size={50}
+                color={arrowactive ? "black" : "white"}
+                className="my-icon"
               />
             </div>
             <a href="" className="block p-2.5 bg-white rounded-[32px]">
-              <span className="px-24.5 py-7.5 block text-[25px] font-semibold rounded-[32px] border border-black hover:text-white hover:bg-black transition-all duration-300 ease-in-out">Shop Tropical Plants</span>
+              <span className="px-24.5 py-7.5 block text-[25px] font-semibold rounded-[32px] border border-black hover:text-white hover:bg-black transition-all duration-300 ease-in-out">
+                Shop Tropical Plants
+              </span>
             </a>
           </div>
         </div>
